@@ -1,0 +1,22 @@
+---
+- name: Install Packages
+  hosts: dev,test,prod
+  tasks:
+    - name: Install php and mariadb
+      yum:
+        name:
+          - php
+          - mariadb
+        state: present
+
+    - name: Install Development Tools
+      yum:
+        name: "@Development tools"
+        state: present
+      when: "'dev' in group_names"
+
+    - name: UPDATE Pakcges
+      yum:
+        update_only: yes
+      when: "'dev' in group_names"
+

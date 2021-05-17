@@ -1,0 +1,53 @@
+---
+- name: Install httpd and Settings
+  hosts: all
+  tasks:
+    - name: Install httpd
+      yum: 
+        name: httpd
+        state: present
+
+    - name: Start and Enabled
+      service: 
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Make Directory
+      file:
+        path: /var/www/html/webdev
+        state: directory
+
+    - name: Make web contents in target:dev
+      copy:
+        content: "Development\n"
+        dest: /var/www/html/webdev/index.html
+      when: "'dev' in group_names"
+      notify: restart httpd
+
+    - name: Make web contents in target:test
+      copy:
+        content: "Test\n"
+        dest: /var/www/html/webdev/index.html
+      when: "'test' in group_names"
+      notify: restart httpd
+
+    - name: Make web contents in target:prod
+      copy:
+        content: "Production\n"
+        dest: /var/www/html/webdev/index.html
+      when: "'prod' in group_names"
+      notify: restart httpd
+
+#    - name: Edit httpd.conf
+#      lineinfile:
+#        path: /etc/httpd/conf/httpd.conf
+#        regexp: "^DocumentRoot"
+#        line: 'DocumentRoot "/var/www/html/webdev"'
+#      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

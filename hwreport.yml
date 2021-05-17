@@ -1,0 +1,40 @@
+---
+- name: OUTPUT HW Report using hwreport.txt
+  hosts: all
+  tasks:
+    - name: Copy HW Report FORM to Target
+      copy:
+        src: hwreport.txt
+        dest: /home/ec2-user/hwreport.txt
+
+    - name: Edit HOSTNAME info
+      lineinfile:
+        path: /home/ec2-user/hwreport.txt
+        regexp: "^HOST"
+        line: HOST={{ansible_facts['fqdn']}}
+
+    - name: Edit MEMORY info
+      lineinfile:
+        path: /home/ec2-user/hwreport.txt
+        regexp: "^MEMORY"
+        line: MEMORY={{ansible_facts['memtotal_mb']}} MB
+
+    - name: Edit BIOS version info
+      lineinfile:
+        path: /home/ec2-user/hwreport.txt
+        regexp: "^BIOS"
+        line: BIOS={{ansible_facts['bios_version']}}
+
+    - name: Edit DISK1 info
+      lineinfile:
+        path: /home/ec2-user/hwreport.txt
+        regexp: "^DISK1_SIZE"
+        line: DISK1_SIZE={% if ansible_facts['devices']['xvda'] is defined %}{{ansible_facts['devices']['xvda']['size']}}{% else %}DISK in not EXIST {% endif %}
+
+    - name: Edit DISK2 info
+      lineinfile:
+        path: /home/ec2-user/hwreport.txt
+        regexp: "^DISK2_SIZE"
+        line: DISK2_SIZE={% if ansible_devices.xvdf is defined %}{{ansible_devices.xvdf.size }}{% else %}DISK in not EXIST{% endif %}
+
+
