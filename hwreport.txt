@@ -1,0 +1,5 @@
+HOST=hostname
+MEMORY=Total Memory MB
+BIOS= Bios Version
+DISK1_SIZE=disk1 size
+DISK2_SIZE=disk2 size
