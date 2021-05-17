@@ -1,0 +1,8 @@
+---
+- name: GET HW Report from hwreport.txt
+  hosts: all
+  tasks:
+    - name: GET HW Report
+      command: cat /home/ec2-user/hwreport.txt
+
+
