@@ -4,5 +4,8 @@
   tasks:
     - name: GET HW Report
       command: cat /home/ec2-user/hwreport.txt
+      register: result
 
-
+    - name: OUTPUT result
+      debug:
+        msg: "{{ result.stdout_lines }}"
