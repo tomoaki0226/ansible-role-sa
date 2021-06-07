@@ -1,0 +1,11 @@
+---
+- name: Exec Windows commands
+  hosts: windows
+  tasks:
+    - name: Exec Windows commands
+      win_command: wmic qfe
+      register: cmd_out
+
+    - name: OUTPUT cmd_out
+      debug:
+        var: cmd_out
