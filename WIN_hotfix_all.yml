@@ -1,0 +1,50 @@
+---
+- name: Exec Windows commands
+  hosts: windows
+  vars_files:
+    - hotfix.yml
+  tasks:
+    - name: GET HOTFIX Information BEFORE FIX APPLY
+      win_command: wmic qfe
+      register: cmd_out_before
+
+    - name: OUTPUT cmd_out_before
+      debug:
+        var: cmd_out_before
+
+    - name: Copy a HOTFIX to Target
+      ansible.windows.win_copy:
+        src: "{{ item.name }}"
+        dest: C:\Users\Administrator\HOTFIX\
+      loop: "{{ hotfix }}"
+
+    - name: Check copied file (Get information about a file using stat)
+      ansible.windows.win_stat:
+        path: C:\Users\Administrator\HOTFIX\{{ item.name }}
+      loop: "{{ hotfix }}"
+
+    - name: Install hotfix without validating the KB and Identifier
+      win_hotfix:
+#        hotfix_kb: KB5003255
+        source: C:\Users\Administrator\HOTFIX\{{ item.name }}
+        state: present
+      loop: "{{ hotfix }}"
+      register: hotfix_install
+      notify: restart windows
+
+    - name: OUTPUT result
+      debug:
+        var: hotfix_install
+
+    - name: GET HOTFIX Information AFTER FIX APPLY
+      win_command: wmic qfe
+      register: cmd_out_after
+
+    - name: OUTPUT cmd_out
+      debug:
+        var: cmd_out_after
+
+  handlers:
+    - name: restart windows
+      ansible.windows.win_reboot:
+
