@@ -1,0 +1,17 @@
+---
+- name:
+  hosts: dev
+  tasks:
+    - name: Copy a single file
+      copy:
+        src: /home/ec2-user/WIN/testfile.txt
+        dest: /home/ec2-user/testfile.txt
+
+    - name: Check copied file (Get information about a file using stat)
+      stat:
+        path: /home/ec2-user/testfile.txt
+      register: result
+
+    - name: OUTPUT result
+      debug:
+        var: result
