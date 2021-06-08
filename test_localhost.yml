@@ -1,0 +1,12 @@
+---
+- name:
+  hosts: localhost
+  tasks:
+    - name:
+      command: ls -la
+      register: result
+      
+    - name:
+      debug:
+        var: result
+    
