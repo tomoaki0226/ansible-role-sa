@@ -1,0 +1,17 @@
+---
+- name:
+  hosts: windows
+  tasks:
+    - name: Copy a single file
+      win_copy:
+        src: /home/ec2-user/WIN/testfile.txt
+        dest: C:\Users\Administrator\HOTFIX\
+
+    - name: Check copied file (Get information about a file using stat)
+      win_stat:
+        path: C:\Users\Administrator\HOTFIX\
+      register: result
+
+    - name: OUTPUT result
+      debug:
+        var: result
