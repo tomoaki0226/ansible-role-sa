@@ -4,6 +4,7 @@
   tasks:
     - name: Copy a single file
       win_copy:
+        remote_src: yes
         src: /home/ec2-user/WIN/testfile.txt
         dest: C:\Users\Administrator\HOTFIX\
 
