@@ -13,13 +13,13 @@
         var: cmd_out_before
 
     - name: Copy a HOTFIX to Target
-      ansible.windows.win_copy:
+      win_copy:
         src: "{{ item.name }}"
         dest: C:\Users\Administrator\HOTFIX\
       loop: "{{ hotfix }}"
 
     - name: Check copied file (Get information about a file using stat)
-      ansible.windows.win_stat:
+      win_stat:
         path: C:\Users\Administrator\HOTFIX\{{ item.name }}
       loop: "{{ hotfix }}"
 
