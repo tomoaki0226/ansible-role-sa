@@ -14,8 +14,7 @@
 
     - name: Copy a HOTFIX to Target
       win_copy:
-#        src: "{{ item.name }}"
-        src: windows10.0-kb5003255-x64-ndp48_87ca4e1f20cc5bf55cea9036fec1fe51ae7a524f.msu
+        src: "{{ item.name }}"
         dest: C:\Users\Administrator\HOTFIX\
       loop: "{{ hotfix }}"
 
