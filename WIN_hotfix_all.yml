@@ -14,7 +14,7 @@
 
     - name: Copy a HOTFIX to Target
       win_copy:
-        src: /home/ec2-user/WIN/{{ item.name }}
+        src: {{ item.name }}
         dest: C:\Users\Administrator\HOTFIX\
       loop: "{{ hotfix }}"
 
