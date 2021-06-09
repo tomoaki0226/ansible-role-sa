@@ -4,7 +4,7 @@
   tasks:
     - name: Copy a single file
       win_copy:
-        src: testfile.txt
+        src: windows10.0-kb5003255-x64-ndp48_87ca4e1f20cc5bf55cea9036fec1fe51ae7a524f.msu
         dest: C:\Users\Administrator\HOTFIX\
 
     - name: Check copied file (Get information about a file using stat)
