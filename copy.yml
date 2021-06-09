@@ -6,7 +6,6 @@
       copy:
         src: /home/ec2-user/WIN/testfile.txt
         dest: /home/ec2-user/testfile.txt
-        remote_src: yes
 
     - name: Check copied file (Get information about a file using stat)
       stat:
