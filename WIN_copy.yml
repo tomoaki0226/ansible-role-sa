@@ -4,8 +4,7 @@
   tasks:
     - name: Copy a single file
       win_copy:
-        remote_src: yes
-        src: /var/lib/awx/projects/_8__my_repo/testfile.txt
+        src: testfile.txt
         dest: C:\Users\Administrator\HOTFIX\
 
     - name: Check copied file (Get information about a file using stat)
