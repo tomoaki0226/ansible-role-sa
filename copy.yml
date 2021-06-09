@@ -4,7 +4,8 @@
   tasks:
     - name: Copy a single file
       copy:
-        src: /home/ec2-user/WIN/testfile.txt
+#        src: /home/ec2-user/WIN/testfile.txt
+        src: testfile.txt
         dest: /home/ec2-user/testfile.txt
 
     - name: Check copied file (Get information about a file using stat)
