@@ -25,17 +25,25 @@
     - name:
       debug:
         var: result
-        
-    - name: exec:ls -ld
-      command: ls -ld /home/ec2-user
+                
+    - name: exec:id
+      command: id
       register: result
       
     - name:
       debug:
         var: result
         
-    - name: exec:ls -ld
-      command: ls -ld /home/ec2-user/WIN
+    - name: exec:ls -la
+      command: ls -la /home/ec2-user
+      register: result
+      
+    - name:
+      debug:
+        var: result
+        
+    - name: exec:ls -la
+      command: ls -la /home/ec2-user/WIN
       register: result
       
     - name:
