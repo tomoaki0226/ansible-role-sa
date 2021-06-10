@@ -18,6 +18,14 @@
       debug:
         var: result
         
+    - name: exec:who
+      command: who
+      register: result
+      
+    - name:
+      debug:
+        var: result
+        
     - name: exec:ls -ld
       command: ls -ld /home/ec2-user
       register: result
