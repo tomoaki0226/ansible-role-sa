@@ -17,4 +17,20 @@
     - name:
       debug:
         var: result
+        
+    - name: exec:ls -ld
+      command: ls -ld /home/ec2-user
+      register: result
+      
+    - name:
+      debug:
+        var: result
+        
+    - name: exec:ls -ld
+      command: ls -ld /home/ec2-user/WIN
+      register: result
+      
+    - name:
+      debug:
+        var: result
     
